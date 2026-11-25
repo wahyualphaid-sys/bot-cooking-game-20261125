@@ -4,7 +4,7 @@
 // right, and the shift timer + score across the top. Big labels, big shapes:
 // every screenshot must read clearly even when shrunk to a thumbnail.
 
-import { INGREDIENTS, ingredientById } from './recipes.js';
+import { INGREDIENTS, ingredientById, recipeById } from './recipes.js';
 import { rushLevelForElapsed } from './kitchenState.js';
 
 export const VIEW_WIDTH = 1280;
@@ -86,6 +86,8 @@ export function drawAssemblyAndStove(ctx, state) {
     ctx.fillStyle = '#ff7b33';
     ctx.beginPath(); ctx.ellipse(486, 486, 44, 20, 0, 0, Math.PI * 2); ctx.fill();
     const ratio = state.cooking.progress / state.cooking.duration;
+    const cookingRecipe = recipeById(state.cooking.recipeId);
+    if (cookingRecipe) drawText(ctx, cookingRecipe.name, 646, 448, 17, '#ffffff', 'center', '900');
     ctx.fillStyle = '#3a3a5e'; roundRect(ctx, 566, 470, 160, 22, 11); ctx.fill();
     ctx.fillStyle = '#ffb703'; roundRect(ctx, 566, 470, 160 * ratio, 22, 11); ctx.fill();
     drawText(ctx, 'MEMASAK…', 646, 522, 19, '#ffd166', 'center', '900');

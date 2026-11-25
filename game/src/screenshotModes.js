@@ -22,12 +22,17 @@ export function applyScreenshotScene(state, shotName) {
   state.orders[2].patienceLeft = 25;
   state.selectedOrderNumber = state.orders[0].number;
 
-  if (shotName === 'cover' || shotName === 'cooking') {
-    state.plate = ['rice', 'egg', 'chili'];
+  if (shotName === 'cover') {
     state.cooking = { active: true, progress: 1.8, duration: 3.0, recipeId: 'nasgor', orderNumber: state.orders[0].number };
     state.plate = ['chicken', 'rice'];
     state.readyPlates = [{ recipeId: 'gado', recipeName: 'Gado-Gado Betawi', orderNumber: state.orders[2].number }];
-    state.flashMessage = 'Gado-Gado matang dan siap saji — Nasi Goreng sedang dirakit!';
+    state.flashMessage = 'Gado-Gado matang dan siap saji — Soto Ayam sedang dirakit!';
+    state.flashSeconds = 99;
+  } else if (shotName === 'cooking') {
+    state.plate = [];
+    state.cooking = { active: true, progress: 2.6, duration: 3.0, recipeId: 'nasgor', orderNumber: state.orders[0].number };
+    state.readyPlates = [];
+    state.flashMessage = 'Nasi Goreng Kampung di kompor — hampir matang, siapkan meja saji!';
     state.flashSeconds = 99;
   } else if (shotName === 'orders') {
     state.plate = ['rice', 'egg'];
